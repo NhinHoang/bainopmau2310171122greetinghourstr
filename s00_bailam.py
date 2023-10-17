@@ -47,8 +47,39 @@ greeting('2100')             | Good evening!          | 14
 
 """
 #endregion debai
-
-#region bailam
 def greeting(hour_str):
-  return 'todo'
+  hour_str=hour_str.replace(':','')
+  hour_str=hour_str.replace(' ','')
+  hour_str=hour_str.lower()
+  hour=''
+  min=''
+  if hour_str.find('am') >= 0 or hour_str.find('pm') >= 0:
+      len_report=len(hour_str) - 2
+  else:
+      len_report=len(hour_str)
+
+  if len_report < 4:
+      if hour_str.find('am') >= 0:
+          hour=hour_str[0]
+          min='00'
+      elif hour_str.find('pm') >= 0:
+          hour=str(int(hour_str[0])+12)
+          min='00'
+  elif len_report >= 4:
+      for i in range(0,len_report):
+          if i <= 1:
+              hour+=hour_str[i]
+          elif i > 1 and i <= 3:
+              min+=hour_str[i]
+      if hour_str.find('pm') >= 0:
+          hour=str(int(hour)+12)
+
+  if int(hour) >= 0 and int(hour) <= 11 and int(min) <= 59:
+      return 'Good morning!'
+  elif int(hour) >= 12 and int(hour) <= 17 and int(min) <= 59:
+      return 'Good afternoon!'
+  elif int(hour) >= 18 and int(hour) <= 23 and int(min) <= 59:
+      return 'Good evening!'
+#region bailam
+
 #endregion bailam
